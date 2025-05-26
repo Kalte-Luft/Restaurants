@@ -33,6 +33,60 @@
     <section id="restaurants" class="restaurants">
       <div class="container">
         <h2>Danh Sách Nhà Hàng</h2>
+        <!-- Filters Section -->
+        <div class="filters">
+          <h3>Bộ lọc</h3>
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label for="searchInput">Tìm kiếm:</label>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Tên nhà hàng, địa chỉ..."
+              />
+            </div>
+            <div class="filter-group">
+              <label for="cuisineFilter">Loại ẩm thực:</label>
+              <select id="cuisineFilter">
+                <option value="">Tất cả</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Mexican">Mexican</option>
+                <option value="Italian">Italian</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="priceFilter">Mức giá:</label>
+              <select id="priceFilter">
+                <option value="">Tất cả</option>
+                <option value="low">Rẻ ($)</option>
+                <option value="medium">Trung bình ($$)</option>
+                <option value="high">Cao ($$$)</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="ratingFilter">Đánh giá tối thiểu:</label>
+              <select id="ratingFilter">
+                <option value="">Tất cả</option>
+                <option value="1">1+ sao</option>
+                <option value="2">2+ sao</option>
+                <option value="3">3+ sao</option>
+                <option value="4">4+ sao</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="statusFilter">Trạng thái:</label>
+              <select id="statusFilter">
+                <option value="">Tất cả</option>
+                <option value="open">Đang mở</option>
+                <option value="closed">Đóng cửa</option>
+              </select>
+            </div>
+            <button class="clear-btn" id="clearFilters">Xóa bộ lọc</button>
+          </div>
+        </div>
+
         <div class="restaurant-stats">
           <span id="restaurantCount">0 nhà hàng</span>
           <div class="sort-controls">

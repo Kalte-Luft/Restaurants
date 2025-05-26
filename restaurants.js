@@ -100,6 +100,14 @@ const restaurantCount = document.getElementById("restaurantCount");
 const navToggle = document.querySelector(".nav-toggle");
 const navMenu = document.querySelector(".nav-menu");
 
+// Filter elements
+const searchInput = document.getElementById("searchInput");
+const cuisineFilter = document.getElementById("cuisineFilter");
+const priceFilter = document.getElementById("priceFilter");
+const ratingFilter = document.getElementById("ratingFilter");
+const statusFilter = document.getElementById("statusFilter");
+const clearFiltersBtn = document.getElementById("clearFilters");
+
 // Initialize
 document.addEventListener("DOMContentLoaded", function () {
   initializeApp();
@@ -112,8 +120,16 @@ function initializeApp() {
 }
 
 function setupEventListeners() {
-  sortBy.addEventListener("change", applySort);
+  sortBy.addEventListener("change", applyFiltersAndSort);
   navToggle.addEventListener("click", toggleMobileNav);
+
+  // Filter event listeners
+  searchInput.addEventListener("input", applyFiltersAndSort);
+  cuisineFilter.addEventListener("change", applyFiltersAndSort);
+  priceFilter.addEventListener("change", applyFiltersAndSort);
+  ratingFilter.addEventListener("change", applyFiltersAndSort);
+  statusFilter.addEventListener("change", applyFiltersAndSort);
+  clearFiltersBtn.addEventListener("click", clearAllFilters);
 
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", function (e) {
@@ -330,11 +346,65 @@ function getParkingDisplay(parking) {
   return parkingMap[parking] || "N/A";
 }
 
-function applySort() {
-  let sortedRestaurants = [...restaurantsData];
+function applyFiltersAndSort() {
+  let filteredRestaurants = [...restaurantsData];
 
+  // Apply search filter
+  const searchTerm = searchInput.value.toLowerCase().trim();
+  if (searchTerm) {
+    filteredRestaurants = filteredRestaurants.filter(
+      (restaurant) =>
+        restaurant.name.toLowerCase().includes(searchTerm) ||
+        restaurant.address.toLowerCase().includes(searchTerm) ||
+        restaurant.city.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  // Apply cuisine filter
+  const cuisineValue = cuisineFilter.value;
+  if (cuisineValue) {
+    filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+      const restaurantCuisines = cuisinesData
+        .filter((c) => c.placeID === restaurant.placeID)
+        .map((c) => c.Rcuisine);
+      return restaurantCuisines.includes(cuisineValue);
+    });
+  }
+
+  // Apply price filter
+  const priceValue = priceFilter.value;
+  if (priceValue) {
+    filteredRestaurants = filteredRestaurants.filter(
+      (restaurant) => restaurant.price === priceValue
+    );
+  }
+
+  // Apply rating filter
+  const ratingValue = ratingFilter.value;
+  if (ratingValue) {
+    const minRating = parseFloat(ratingValue);
+    filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+      const restaurantRatings = ratingsData.filter(
+        (r) => r.placeID === restaurant.placeID
+      );
+      const avgRating = calculateAverageRating(restaurantRatings);
+      return avgRating >= minRating;
+    });
+  }
+
+  // Apply status filter
+  const statusValue = statusFilter.value;
+  if (statusValue) {
+    filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+      const hours = hoursData.find((h) => h.placeID === restaurant.placeID);
+      const isOpen = hours ? checkIfOpen(hours.hours, hours.days) : false;
+      return statusValue === "open" ? isOpen : !isOpen;
+    });
+  }
+
+  // Apply sorting
   const sortValue = sortBy.value;
-  sortedRestaurants.sort((a, b) => {
+  filteredRestaurants.sort((a, b) => {
     switch (sortValue) {
       case "name":
         return a.name.localeCompare(b.name);
@@ -354,7 +424,18 @@ function applySort() {
     }
   });
 
-  displayRestaurants(sortedRestaurants);
+  displayRestaurants(filteredRestaurants);
+}
+
+function clearAllFilters() {
+  searchInput.value = "";
+  cuisineFilter.value = "";
+  priceFilter.value = "";
+  ratingFilter.value = "";
+  statusFilter.value = "";
+  sortBy.value = "name";
+
+  displayRestaurants(restaurantsData);
 }
 
 function updateRestaurantCount(count) {
