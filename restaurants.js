@@ -99,14 +99,6 @@ const sortBy = document.getElementById("sortBy");
 const restaurantCount = document.getElementById("restaurantCount");
 const navToggle = document.querySelector(".nav-toggle");
 const navMenu = document.querySelector(".nav-menu");
-const searchInput = document.getElementById("searchInput");
-const searchBtn = document.getElementById("searchBtn");
-const cuisineFilter = document.getElementById("cuisineFilter");
-const priceFilter = document.getElementById("priceFilter");
-const alcoholFilter = document.getElementById("alcoholFilter");
-const smokingFilter = document.getElementById("smokingFilter");
-const parkingFilter = document.getElementById("parkingFilter");
-const clearFilters = document.getElementById("clearFilters");
 
 // Initialize
 document.addEventListener("DOMContentLoaded", function () {
@@ -120,24 +112,8 @@ function initializeApp() {
 }
 
 function setupEventListeners() {
-  sortBy.addEventListener("change", applyFilters);
+  sortBy.addEventListener("change", applySort);
   navToggle.addEventListener("click", toggleMobileNav);
-
-  // Search functionality
-  searchBtn.addEventListener("click", performSearch);
-  searchInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      performSearch();
-    }
-  });
-
-  // Filter functionality
-  cuisineFilter.addEventListener("change", applyFilters);
-  priceFilter.addEventListener("change", applyFilters);
-  alcoholFilter.addEventListener("change", applyFilters);
-  smokingFilter.addEventListener("change", applyFilters);
-  parkingFilter.addEventListener("change", applyFilters);
-  clearFilters.addEventListener("click", clearAllFilters);
 
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", function (e) {
@@ -158,7 +134,6 @@ function loadSampleData() {
     hoursData = sampleHours;
     parkingData = sampleParking;
 
-    populateFilters();
     displayRestaurants(restaurantsData);
     hideLoading();
   }, 1000);
@@ -355,82 +330,11 @@ function getParkingDisplay(parking) {
   return parkingMap[parking] || "N/A";
 }
 
-function performSearch() {
-  const searchTerm = searchInput.value.toLowerCase().trim();
-  if (!searchTerm) {
-    applyFilters();
-    return;
-  }
+function applySort() {
+  let sortedRestaurants = [...restaurantsData];
 
-  const filteredRestaurants = restaurantsData.filter((restaurant) => {
-    const nameMatch = restaurant.name.toLowerCase().includes(searchTerm);
-    const addressMatch =
-      restaurant.address &&
-      restaurant.address.toLowerCase().includes(searchTerm);
-    const cityMatch =
-      restaurant.city && restaurant.city.toLowerCase().includes(searchTerm);
-    const cuisineMatch = cuisinesData
-      .filter((c) => c.placeID === restaurant.placeID)
-      .map((c) => c.Rcuisine.toLowerCase())
-      .some((cuisine) => cuisine.includes(searchTerm));
-
-    return nameMatch || addressMatch || cityMatch || cuisineMatch;
-  });
-
-  applyFilters(filteredRestaurants);
-}
-
-function applyFilters(baseRestaurants = restaurantsData) {
-  let filteredRestaurants = [...baseRestaurants];
-
-  // Apply cuisine filter
-  const selectedCuisine = cuisineFilter.value;
-  if (selectedCuisine) {
-    const restaurantsWithCuisine = cuisinesData
-      .filter((c) => c.Rcuisine === selectedCuisine)
-      .map((c) => c.placeID);
-    filteredRestaurants = filteredRestaurants.filter((r) =>
-      restaurantsWithCuisine.includes(r.placeID)
-    );
-  }
-
-  // Apply price filter
-  const selectedPrice = priceFilter.value;
-  if (selectedPrice) {
-    filteredRestaurants = filteredRestaurants.filter(
-      (r) => r.price === selectedPrice
-    );
-  }
-
-  // Apply alcohol filter
-  const selectedAlcohol = alcoholFilter.value;
-  if (selectedAlcohol) {
-    filteredRestaurants = filteredRestaurants.filter(
-      (r) => r.alcohol === selectedAlcohol
-    );
-  }
-
-  // Apply smoking filter
-  const selectedSmoking = smokingFilter.value;
-  if (selectedSmoking) {
-    filteredRestaurants = filteredRestaurants.filter(
-      (r) => r.smoking_area === selectedSmoking
-    );
-  }
-
-  // Apply parking filter
-  const selectedParking = parkingFilter.value;
-  if (selectedParking) {
-    filteredRestaurants = filteredRestaurants.filter(
-      (r) =>
-        parkingData.find((p) => p.placeID === r.placeID)?.parking_lot ===
-        selectedParking
-    );
-  }
-
-  // Apply sorting
   const sortValue = sortBy.value;
-  filteredRestaurants.sort((a, b) => {
+  sortedRestaurants.sort((a, b) => {
     switch (sortValue) {
       case "name":
         return a.name.localeCompare(b.name);
@@ -444,50 +348,13 @@ function applyFilters(baseRestaurants = restaurantsData) {
         return ratingB - ratingA;
       case "price":
         const priceOrder = { low: 1, medium: 2, high: 3 };
-        return (priceOrder[a.price] || 0) - (priceOrder[b.price] || 0);
+        return priceOrder[a.price] - priceOrder[b.price];
       default:
         return 0;
     }
   });
 
-  displayRestaurants(filteredRestaurants);
-}
-
-function clearAllFilters() {
-  cuisineFilter.value = "";
-  priceFilter.value = "";
-  alcoholFilter.value = "";
-  smokingFilter.value = "";
-  parkingFilter.value = "";
-  sortBy.value = "name";
-  searchInput.value = "";
-  displayRestaurants(restaurantsData);
-}
-
-function populateFilters() {
-  // Populate cuisine filter
-  const uniqueCuisines = [
-    ...new Set(cuisinesData.map((c) => c.Rcuisine)),
-  ].sort();
-  cuisineFilter.innerHTML = '<option value="">Tất cả</option>';
-  uniqueCuisines.forEach((cuisine) => {
-    const option = document.createElement("option");
-    option.value = cuisine;
-    option.textContent = cuisine;
-    cuisineFilter.appendChild(option);
-  });
-
-  // Populate parking filter
-  const uniqueParking = [
-    ...new Set(parkingData.map((p) => p.parking_lot)),
-  ].sort();
-  parkingFilter.innerHTML = '<option value="">Tất cả</option>';
-  uniqueParking.forEach((parking) => {
-    const option = document.createElement("option");
-    option.value = parking;
-    option.textContent = getParkingDisplay(parking);
-    parkingFilter.appendChild(option);
-  });
+  displayRestaurants(sortedRestaurants);
 }
 
 function updateRestaurantCount(count) {
