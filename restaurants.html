@@ -33,6 +33,70 @@
     <section id="restaurants" class="restaurants">
       <div class="container">
         <h2>Danh Sách Nhà Hàng</h2>
+
+        <!-- Search and Filters Section -->
+        <div class="search-filter-section">
+          <div class="search-box">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Tìm kiếm nhà hàng, món ăn..."
+            />
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="filters">
+            <div class="filter-group">
+              <label for="cuisineFilter">Loại món:</label>
+              <select id="cuisineFilter">
+                <option value="">Tất cả</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="priceFilter">Giá:</label>
+              <select id="priceFilter">
+                <option value="">Tất cả</option>
+                <option value="low">Rẻ ($)</option>
+                <option value="medium">Trung bình ($$)</option>
+                <option value="high">Cao ($$$)</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="alcoholFilter">Rượu:</label>
+              <select id="alcoholFilter">
+                <option value="">Tất cả</option>
+                <option value="No_Alcohol_Served">Không có rượu</option>
+                <option value="Wine-Beer">Rượu vang/Bia</option>
+                <option value="Full_Bar">Đầy đủ</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="smokingFilter">Hút thuốc:</label>
+              <select id="smokingFilter">
+                <option value="">Tất cả</option>
+                <option value="none">Không hút thuốc</option>
+                <option value="section">Khu vực riêng</option>
+                <option value="permitted">Được phép</option>
+                <option value="only at bar">Chỉ tại quầy bar</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="parkingFilter">Bãi đỗ xe:</label>
+              <select id="parkingFilter">
+                <option value="">Tất cả</option>
+              </select>
+            </div>
+
+            <button id="clearFilters" class="clear-btn">
+              <i class="fas fa-times"></i> Xóa bộ lọc
+            </button>
+          </div>
+        </div>
+
         <div class="restaurant-stats">
           <span id="restaurantCount">0 nhà hàng</span>
           <div class="sort-controls">
