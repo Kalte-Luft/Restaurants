@@ -107,12 +107,13 @@ const priceFilter = document.getElementById("priceFilter");
 const ratingFilter = document.getElementById("ratingFilter");
 const statusFilter = document.getElementById("statusFilter");
 const clearFiltersBtn = document.getElementById("clearFilters");
+const parkingFilter = document.getElementById("parkingFilter");
 
 // Initialize
 document.addEventListener("DOMContentLoaded", function () {
-  initializeApp();
-  setupEventListeners();
   loadSampleData();
+  setupEventListeners();
+  // initializeApp();
 });
 
 function initializeApp() {
@@ -130,6 +131,7 @@ function setupEventListeners() {
   ratingFilter.addEventListener("change", applyFiltersAndSort);
   statusFilter.addEventListener("change", applyFiltersAndSort);
   clearFiltersBtn.addEventListener("click", clearAllFilters);
+  parkingFilter.addEventListener("change", applyFiltersAndSort);
 
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", function (e) {
@@ -392,13 +394,22 @@ function applyFiltersAndSort() {
     });
   }
 
-  // Apply status filter
-  const statusValue = statusFilter.value;
-  if (statusValue) {
+  // // Apply status filter
+  // const statusValue = statusFilter.value;
+  // if (statusValue) {
+  //   filteredRestaurants = filteredRestaurants.filter((restaurant) => {
+  //     const hours = hoursData.find((h) => h.placeID === restaurant.placeID);
+  //     const isOpen = hours ? checkIfOpen(hours.hours, hours.days) : false;
+  //     return statusValue === "open" ? isOpen : !isOpen;
+  //   });
+  // }
+
+  // Apply parking filter
+  const parkingValue = parkingFilter.value;
+  if (parkingValue) {
     filteredRestaurants = filteredRestaurants.filter((restaurant) => {
-      const hours = hoursData.find((h) => h.placeID === restaurant.placeID);
-      const isOpen = hours ? checkIfOpen(hours.hours, hours.days) : false;
-      return statusValue === "open" ? isOpen : !isOpen;
+      const parking = parkingData.find((p) => p.placeID === restaurant.placeID);
+      return parking && parking.parking_lot === parkingValue;
     });
   }
 
@@ -433,6 +444,7 @@ function clearAllFilters() {
   priceFilter.value = "";
   ratingFilter.value = "";
   statusFilter.value = "";
+  parkingFilter.value = "";
   sortBy.value = "name";
 
   displayRestaurants(restaurantsData);

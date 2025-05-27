@@ -76,11 +76,13 @@
             </div>
 
             <div class="filter-group">
-              <label for="statusFilter">Trạng thái:</label>
-              <select id="statusFilter">
+              <label for="parkingFilter">Bãi đổ xe:</label>
+              <select id="parkingFilter">
                 <option value="">Tất cả</option>
-                <option value="open">Đang mở</option>
-                <option value="closed">Đóng cửa</option>
+                <option value="yes">Có</option>
+                <option value="none">Không</option>
+                <option value="public">Công cộng</option>
+                <option value="valet parking">Valet</option>
               </select>
             </div>
             <button class="clear-btn" id="clearFilters">Xóa bộ lọc</button>
@@ -108,13 +110,15 @@
       </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-            <h4>Restaurant Finder</h4>
-            <p>Khám phá những nhà hàng tuyệt vời gần bạn</p>
+            <div class="footer-title">
+              <i class="fas fa-utensils"></i>
+              <h4>Restaurant Finder</h4>
+            </div>
+            <p>Khám phá những nhà hàng tuyệt vời phù hợp với bạn!</p>
           </div>
           <div class="footer-section">
             <h4>Liên Kết</h4>
@@ -126,10 +130,10 @@
           </div>
           <div class="footer-section">
             <h4>Theo Dõi</h4>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-facebook"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+            <div class="social-links vertical">
+              <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+              <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+              <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
             </div>
           </div>
         </div>

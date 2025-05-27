@@ -545,7 +545,8 @@ body {
 
 /* Footer */
 .footer {
-  background: #4c5258;
+  /* background: #4c5258; */
+  background: #262729;
   /* background: linear-gradient(135deg, #667eea, #764ba2); */
   color: white;
   padding: 3rem 0 1rem;
@@ -1078,4 +1079,38 @@ body {
   height: auto;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+/* ICON cho từng phần - đẹp nhẹ nhàng */
+.detail-section h3 i {
+  margin-right: 8px;
+  font-size: 1.1em;
+  vertical-align: middle;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Màu riêng từng loại icon */
+.detail-section h3 i.fa-info-circle {
+  color: #6c5ce7; /* tím pastel */
+}
+.detail-section h3 i.fa-drumstick-bite {
+  color: #e17055; /* cam đất, giống màu đồ ăn */
+}
+.detail-section h3 i.fa-credit-card {
+  color: #00b894; /* xanh ngọc đẹp sang */
+}
+.detail-section h3 i.fa-clock {
+  color: #0984e3; /* xanh biển pastel */
+}
+.detail-section h3 i.fa-star-half-stroke {
+  color: #fdcb6e; /* vàng nhẹ, hợp đánh giá */
+}
+.detail-section h4 i.fa-comments {
+  color: #fdcb6e;
+}
+
+/* Hover nhẹ nhàng, sang trọng */
+.detail-section h3:hover i,
+.detail-section h4:hover i {
+  transform: scale(1.15);
+  filter: brightness(1.1);
 }
