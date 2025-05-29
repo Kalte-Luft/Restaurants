@@ -164,12 +164,12 @@ cython_debug/
 .vscode/
 
 # Data files (nếu bạn không muốn push dữ liệu lên git)
-*.csv
-*.xlsx
-*.xls
-*.json
-data/
-datasets/
+# *.csv
+# *.xlsx
+# *.xls
+# *.json
+# data/
+# datasets/
 
 # Model files (nếu model quá lớn)
 *.pkl
