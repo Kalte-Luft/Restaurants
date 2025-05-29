@@ -72,4 +72,4 @@ The recommendation system uses collaborative filtering with cosine similarity to
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Flask (Python)
 - **Data Processing**: Pandas, NumPy, Scikit-learn
-- **Recommendation Algorithm**: Collaborative Filtering with Cosine Similarity
+- **Recommendation Algorithm**: Collaborative Filtering - Content-based Filtering
