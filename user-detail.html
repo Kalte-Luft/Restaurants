@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết người dùng - Restaurant Finder</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-brand">
+          <i class="fas fa-utensils"></i>
+          <span>Restaurant Finder</span>
+        </div>
+        <div class="nav-menu">
+          <a href="index.html" class="nav-link">Trang Chủ</a>
+          <a href="restaurants.html" class="nav-link">Nhà Hàng</a>
+          <a href="users.html" class="nav-link">Người Dùng</a>
+        </div>
+        <div class="nav-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="user-detail" class="user-detail">
+        <div class="container">
+          <h1>Chi tiết người dùng</h1>
+          <div id="loadingSpinner" class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Đang tải...</p>
+          </div>
+          <div id="userInfo" class="user-info"></div>
+          <div id="userRatings" class="user-ratings">
+            <h2>Đánh giá nhà hàng</h2>
+            <div id="ratingsGrid" class="ratings-grid"></div>
+          </div>
+          <div id="userRecommendations" class="user-recommendations">
+            <h2>Nhà hàng đề xuất</h2>
+            <div id="recommendationsGrid" class="restaurant-grid"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-title">
+              <i class="fas fa-utensils"></i>
+              <h4>Restaurant Finder</h4>
+            </div>
+            <p>Khám phá những nhà hàng tuyệt vời phù hợp với bạn!</p>
+          </div>
+          <div class="footer-section">
+            <h4>Liên Kết</h4>
+            <ul>
+              <li><a href="index.html">Trang Chủ</a></li>
+              <li><a href="restaurants.html">Nhà Hàng</a></li>
+              <li><a href="users.html">Người Dùng</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Theo Dõi</h4>
+            <div class="social-links vertical">
+              <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+              <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+              <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Restaurant Finder. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="user-detail.js"></script>
+  </body>
+</html>

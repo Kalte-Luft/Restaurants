@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Nhà Hàng - Restaurant Finder</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-brand">
+          <i class="fas fa-utensils"></i>
+          <span>Restaurant Finder</span>
+        </div>
+        <div class="nav-menu">
+          <a href="index.html" class="nav-link">Trang Chủ</a>
+          <a href="restaurants.html" class="nav-link">Nhà Hàng</a>
+          <a href="users.html" class="nav-link">Người Dùng</a>
+        </div>
+        <div class="nav-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Restaurant Detail Section -->
+    <section id="restaurantDetail" class="restaurant-detail">
+      <div class="container">
+        <div class="restaurant-detail-header">
+          <h2 id="restaurantName"></h2>
+          <div class="detail-address">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="restaurantAddress"></span>
+          </div>
+        </div>
+        <div class="restaurant-detail-content">
+          <div class="detail-section">
+            <h3><i class="fas fa-info-circle"></i> Thông Tin Cơ Bản</h3>
+            <div class="detail-grid" id="basicInfo"></div>
+          </div>
+          <div class="detail-section">
+            <h3><i class="fas fa-drumstick-bite"></i> Loại Ẩm Thực</h3>
+            <div class="cuisine-tags" id="cuisineTags"></div>
+          </div>
+          <div class="detail-section">
+            <h3><i class="fas fa-credit-card"></i> Phương Thức Thanh Toán</h3>
+            <div class="payment-tags" id="paymentTags"></div>
+          </div>
+          <div class="detail-section">
+            <h3><i class="fas fa-clock"></i> Giờ Mở Cửa</h3>
+            <div id="hoursInfo"></div>
+          </div>
+          <div class="detail-section">
+            <h3><i class="fas fa-star-half-stroke"></i> Đánh Giá</h3>
+            <div class="rating-summary">
+              <div class="rating-stars-large" id="ratingStars"></div>
+              <div class="rating-info">
+                <span class="rating-number" id="ratingNumber"></span>
+                <span class="rating-count" id="ratingCount"></span>
+              </div>
+            </div>
+            <h4><i class="fas fa-comments"></i> Nhận Xét Gần Đây</h4>
+            <div class="recent-reviews" id="recentReviews"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-title">
+              <i class="fas fa-utensils"></i>
+              <h4>Restaurant Finder</h4>
+            </div>
+            <p>Khám phá những nhà hàng tuyệt vời phù hợp với bạn!</p>
+          </div>
+          <div class="footer-section">
+            <h4>Liên Kết</h4>
+            <ul>
+              <li><a href="index.html">Trang Chủ</a></li>
+              <li><a href="restaurants.html">Nhà Hàng</a></li>
+              <li><a href="users.html">Người Dùng</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Theo Dõi</h4>
+            <div class="social-links vertical">
+              <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+              <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+              <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Restaurant Finder. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="restaurant-detail.js"></script>
+  </body>
+</html>
